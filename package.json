@@ -1,0 +1,25 @@
+{
+  "name": "petfinder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naveenperera777/petfinder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naveenperera777/petfinder/issues"
+  },
+  "homepage": "https://github.com/naveenperera777/petfinder#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0",
+    "prettier": "^1.15.3"
+  }
+}
