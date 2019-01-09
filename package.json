@@ -21,5 +21,9 @@
   "devDependencies": {
     "parcel-bundler": "^1.11.0",
     "prettier": "^1.15.3"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }
