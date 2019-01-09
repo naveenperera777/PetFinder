@@ -25007,19 +25007,45 @@ var App =
 function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App() {
+  function App(props) {
+    var _this;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this.state = {
+      pets: []
+    };
+    return _this;
   }
 
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var promise = petfinder.breed.list({
-        animal: "dog"
+      var _this2 = this;
+
+      // const promise = petfinder.breed.list({ animal: "dog" });
+      // promise.then(console.log, console.error);
+      petfinder.pet.find({
+        output: "full",
+        location: "Seattle, WA"
+      }).then(function (data) {
+        var pets;
+
+        if (data.petfinder.pets && data.petfinder.pets.pet) {
+          if (Array.isArray(data.petfinder.pets.pet)) {
+            pets = data.petfinder.pets.pet;
+          } else {
+            pets = [data.petfinder.pets.pet];
+          }
+        } else {
+          pets = [];
+        }
+
+        _this2.setState({
+          pets: pets
+        });
       });
-      promise.then(console.log, console.error);
     }
   }, {
     key: "handleTitleClick",
@@ -25050,21 +25076,21 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("h1", {
-        onClick: this.handleTitleClick
-      }, "\"Adopt Me!\""), _react.default.createElement(_Pet.default, {
-        name: "Jake",
-        animal: "Dog",
-        breed: "gsd"
-      }), _react.default.createElement(_Pet.default, {
-        name: "Pepper",
-        animal: "Bird",
-        breed: "Cockatiel"
-      }), _react.default.createElement(_Pet.default, {
-        name: "Doink",
-        animal: "Cat!",
-        breed: "Mixed"
-      }));
+      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "\"Adopt Me!\""), _react.default.createElement("div", null, this.state.pets.map(function (pet) {
+        var breed;
+
+        if (Array.isArray(pet.breeds.breed)) {
+          breed = pet.breeds.breed.join(". ");
+        } else {
+          breed = pet.breeds.breed;
+        }
+
+        return _react.default.createElement(_Pet.default, {
+          animal: pet.animal,
+          name: pet.name,
+          breed: breed
+        });
+      })));
     }
   }]);
 
@@ -25099,7 +25125,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36547" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42219" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
