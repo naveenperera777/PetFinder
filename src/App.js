@@ -41,9 +41,6 @@ class App extends React.Component {
       });
   }
 
-  handleTitleClick() {
-    alert("You clicked!");
-  }
   // render() {
   //   // return React.createElement("div", {}, [
   //   //   React.createElement("h1", { onClick: this.handleTitleClick }, "Adopt Me"),
@@ -78,7 +75,19 @@ class App extends React.Component {
             } else {
               breed = pet.breeds.breed;
             }
-            return <Pet animal={pet.animal} name={pet.name} breed={breed} />;
+
+            const x = "My dog is" % { breed };
+
+            return (
+              <Pet
+                key={pet.id}
+                animal={pet.animal}
+                name={pet.name}
+                breed={breed}
+                media={pet.media}
+                location={`${pet.contact.city}, ${pet.contact.state}`}
+              />
+            );
           })}
         </div>
       </div>
