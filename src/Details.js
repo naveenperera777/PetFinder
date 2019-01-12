@@ -1,22 +1,21 @@
 import React from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router/lib/history";
+import Carousel from "./Carousel";
 
 const petfinder = pf({
   key: process.env.API_KEY,
   secret: process.env.API_SECRET
 });
 class Details extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true
-    };
-  }
+  //   constructor(props) {
+  //     super(props);
+  //   }
+  state = {
+    loading: true
+  };
 
   componentDidMount() {
-    console.log("id", this.props.id);
     petfinder.pet
       .get({
         output: "full",
@@ -52,10 +51,11 @@ class Details extends React.Component {
     if (this.state.loading) {
       return <h1>loading.....</h1>;
     }
-    const { animal, breed, location, description } = this.state;
+    const { animal, breed, location, description, media } = this.state;
 
     return (
       <div className="details">
+        <Carousel media={media} />
         <div>
           <h1>{name}</h1>
           <h2>

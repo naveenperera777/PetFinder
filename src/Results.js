@@ -21,7 +21,7 @@ class Results extends React.Component {
     // promise.then(console.log, console.error);
 
     petfinder.pet
-      .find({ output: "full", location: "New York, NY" })
+      .find({ output: "full", location: "Seattle, WA" })
       .then(data => {
         let pets;
 
