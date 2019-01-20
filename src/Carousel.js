@@ -1,5 +1,4 @@
 import React from "react";
-
 class Carousel extends React.Component {
   state = {
     photos: [],
@@ -14,13 +13,11 @@ class Carousel extends React.Component {
 
   static getDerivedStateFromProps({ media }) {
     let photos = [];
-
     if (media && media.photos && media.photos.photo) {
       photos = media.photos.photo.filter(photo => photo["@size"] === "pn");
     }
     return { photos: photos };
   }
-
   handleIndexClick = event => {
     this.setState({
       active: +event.target.dataset.index
@@ -28,7 +25,6 @@ class Carousel extends React.Component {
   };
   render() {
     const { photos, active } = this.state;
-
     return (
       <div className="carousel">
         <img src={photos[active].value} alt="primary animal image" />
@@ -48,5 +44,4 @@ class Carousel extends React.Component {
     );
   }
 }
-
 export default Carousel;

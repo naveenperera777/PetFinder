@@ -29,7 +29,6 @@ class Details extends React.Component {
         } else {
           breed = pet.breeds.breed;
         }
-
         this.setState({
           name: pet.name,
           animal: pet.animal,
