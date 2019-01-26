@@ -1,6 +1,7 @@
 import React from "react";
 
 const SearchContext = React.createContext({
+  // Below are optional code *************
   location: "Seattle, WA",
   animal: "",
   breed: "",
