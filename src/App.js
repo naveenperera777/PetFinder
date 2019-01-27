@@ -6,6 +6,7 @@ import Details from "./Details";
 import SearchParams from "./SearchParams";
 import pf from "petfinder-client";
 import { Provider } from "./SearchContext";
+import { Provider as ReduxProvider } from "react-redux";
 
 const petfinder = pf({
   key: process.env.API_KEY,
@@ -16,25 +17,25 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      location: "Seattle, WA",
+      // location: "Seattle, WA",
       animal: "",
       breed: "",
       breeds: [],
       handleAnimalChange: this.handleAnimalChange,
-      handleLocationChange: this.handleLocationChange,
+      // handleLocationChange: this.handleLocationChange,
       handleBreedChange: this.handleBreedChange,
       getBreeds: this.getBreeds
     };
   }
 
-  handleLocationChange = event => {
-    this.setState(
-      {
-        location: event.target.value
-      },
-      this.getBreeds
-    );
-  };
+  // handleLocationChange = event => {
+  //   this.setState(
+  //     {
+  //       location: event.target.value
+  //     },
+  //     this.getBreeds
+  //   );
+  // };
 
   handleAnimalChange = event => {
     this.setState(
@@ -81,13 +82,15 @@ class App extends React.Component {
             </span>
           </Link>
         </header>
-        <Provider value={this.state}>
-          <Router>
-            <Results exact path="/" />
-            <Details path="/details/:animalid" />
-            <SearchParams path="/search-params" />
-          </Router>
-        </Provider>
+        <ReduxProvider store={store}>
+          <Provider value={this.state}>
+            <Router>
+              <Results exact path="/" />
+              <Details path="/details/:animalid" />
+              <SearchParams path="/search-params" />
+            </Router>
+          </Provider>
+        </ReduxProvider>
       </div>
     );
   }
