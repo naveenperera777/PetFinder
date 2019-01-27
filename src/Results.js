@@ -3,7 +3,7 @@ import pf from "petfinder-client";
 import { render } from "react-dom";
 import Pet from "./Pet";
 import SearchBox from "./SearchBox";
-import { Consumer } from "./SearchContext";
+// import { Consumer } from "./SearchContext";
 import { connect } from "react-redux";
 
 const petfinder = pf({
@@ -22,14 +22,12 @@ class Results extends React.Component {
     this.search();
   }
   search = () => {
-    // const promise = petfinder.breed.list({ animal: "dog" });
-    // promise.then(console.log, console.error);
     petfinder.pet
       .find({
         output: "full",
         location: this.props.location,
-        animal: this.props.searchParams.animal,
-        breed: this.props.searchParams.breed
+        animal: this.props.animal,
+        breed: this.props.breed
       })
       .then(data => {
         let pets;
@@ -51,27 +49,6 @@ class Results extends React.Component {
       });
   };
 
-  //   render() {
-  //   // return React.createElement("div", {}, [
-  //   //   React.createElement("h1", { onClick: this.handleTitleClick }, "Adopt Me"),
-  //   //   React.createElement(Pet, {
-  //   //     name: "Jake",
-  //   //     animal: "Dog",
-  //   //     breed: "GSD"
-  //   //     // onClick: this.handleTitleClick
-  //   //   }),
-  //   //   React.createElement(Pet, {
-  //   //     name: "Pepper",
-  //   //     animal: "Bird",
-  //   //     breed: "Cockatiel"
-  //   //   }),
-  //   //   React.createElement(Pet, {
-  //   //     name: "Doink",
-  //   //     animal: "Cat",
-  //   //     breed: "Mixed"
-  //   //   })
-  //   // ]);
-  //   }
   render() {
     return (
       <div className="search">
@@ -103,16 +80,16 @@ class Results extends React.Component {
     );
   }
 }
-function ResultsWithContext(props) {
-  return (
-    <Consumer>
-      {context => <Results {...props} searchParams={context} />}
-    </Consumer>
-  );
-}
+// function ResultsWithContext(props) {
+//   return (
+//     <Consumer>
+//       {context => <Results {...props} searchParams={context} />}
+//     </Consumer>
+//   );
+// }
 
-const mapStateToProps = ({ location }) => {
-  return { location };
+const mapStateToProps = ({ location, breed, animal }) => {
+  return { location, animal, breed };
 };
 
-export default connect(mapStateToProps)(ResultsWithContext);
+export default connect(mapStateToProps)(Results);
